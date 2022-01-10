@@ -19,7 +19,7 @@ pipeline {
 			    withCredentials([usernamePassword(credentialsId: 'krupadocker', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
 			        bat "docker login --username=${user} --password=${pass}"
-			        bat "docker push kneerati12345/selenium-docker:latest"
+			        bat "docker push kneerati12345/selenium-docker-exec"
 			    }                           
             }
         }
