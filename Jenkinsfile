@@ -11,7 +11,7 @@ pipeline {
         stage('BuildImage') {
             steps {
                 //sh
-                bat "docker build -t='kneerati12345/selenium-docker-exec' ."
+                bat "docker build -t=kneerati12345/selenium-docker-exec ."
             }
         }
         stage('PushImage') {
