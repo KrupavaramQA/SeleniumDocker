@@ -1,6 +1,6 @@
 pipeline {
     // master executor should be set to 0
-    agent any	
+    Agent any	
         stage('Build Jar') {
             steps {
                 //sh
