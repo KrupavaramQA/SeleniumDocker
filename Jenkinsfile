@@ -1,19 +1,20 @@
 pipeline {
     // master executor should be set to 0
-    Agent any	
-        stage('Build Jar') {
+    agent any
+	stages{
+        stage('Build') {
             steps {
                 //sh
                 bat "mvn clean package -DskipTests"
             }
         }
-        stage('Build Image') {
+        stage('BuildImage') {
             steps {
                 //sh
                 bat "docker build -t='kneerati12345/selenium-docker-exec' ."
             }
         }
-        stage('Push Image') {
+        stage('PushImage') {
             steps {
 			    withCredentials([usernamePassword(credentialsId: 'krupadocker', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     //sh
@@ -23,3 +24,4 @@ pipeline {
             }
         }
     }
+}
