@@ -5,4 +5,5 @@ ADD target/selenium-docker-tests.jar selenium-docker-tests.jar
 ADD target/libs libs
 ADD target/test-classes test-classes
 ADD testng.xml testng.xml
-ENTRYPOINT java -cp selenium-docker-tests.jar:selenium-docker.jar:libs/*:test-classes/* org.testng.TestNG testng.xml
+ADD healthcheck.sh healthcheck.sh
+ENTRYPOINT sh healthcheck.sh
