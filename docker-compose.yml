@@ -1,36 +1,24 @@
-# To execute this docker-compose yml file use `docker-compose -f docker-compose-v3.yml up`
-# Add the `-d` flag at the end for detached execution
-# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-v3.yml down`version: "3"
+version: "3"
 services:
   hub:
-    image: selenium/hub
-    ports:
-      - "4444:4444"
-    environment:
-      GRID_MAX_SESSION: 16
-      GRID_BROWSER_TIMEOUT: 3000
-      GRID_TIMEOUT: 3000
-
+    image: selenium/hub:3.14
   chrome:
-    image: selenium/node-chrome
+    image: selenium/node-chrome:3.14      
     depends_on:
       - hub
     environment:
-      HUB_PORT_4444_TCP_ADDR: hub
-      HUB_PORT_4444_TCP_PORT: 4444
-    volumes:
-      - /dev/shm:/dev/shm
-    links:
-      - hub
-
+      - HUB_HOST=hub     
   firefox:
-    image: selenium/node-firefox
+    image: selenium/node-firefox:3.14
+    shm_size: '1gb'   
     depends_on:
       - hub
     environment:
-      HUB_PORT_4444_TCP_ADDR: hub
-      HUB_PORT_4444_TCP_PORT: 4444
+      - HUB_HOST=hub
+  dockertest:
+    image: kneerati12345/selenium-docker-exec
+    depends_on:
+      - chrome
+      - firefox
     volumes:
-      - /dev/shm:/dev/shm
-    links:
-      - hub
+      - D:\GIT\Reports:/usr/share/udemy/test-output

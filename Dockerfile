@@ -1,4 +1,5 @@
 FROM openjdk:8u191-jre-alpine3.8
+RUN apk add curl jq
 WORKDIR /user/share/execution
 ADD target/selenium-docker.jar selenium-docker.jar
 ADD target/selenium-docker-tests.jar selenium-docker-tests.jar
